@@ -1,6 +1,6 @@
 package io.lilbecedary.lilbecedary_backend.dto;
 
-public class AlbumDTO {
+public class BaseAlbumDTO {
 	
 	private String albumPid;
 	private String albumTitle;

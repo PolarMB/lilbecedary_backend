@@ -2,6 +2,8 @@ package io.lilbecedary.lilbecedary_backend.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.NaturalId;
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="albums", schema="lilbecedary_db")
@@ -53,6 +56,11 @@ public class Album implements Serializable {
 			}, fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_id")
 	private Artist artist;
+	
+	@OneToMany(mappedBy="album", 
+			cascade= { CascadeType.ALL }, 
+			fetch=FetchType.LAZY)
+	private List<Song> songs; 
 	
 	public Album() {}
 
@@ -98,7 +106,7 @@ public class Album implements Serializable {
 		this.releaseDate = releaseDate;
 	}
 
-	public int getTrackCount() {
+	public Integer getTrackCount() {
 		return trackCount;
 	}
 
@@ -122,10 +130,24 @@ public class Album implements Serializable {
 		this.artist = artist;
 	}
 
+	public List<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
+	}
+
+	public void setTrackCount(Integer trackCount) {
+		this.trackCount = trackCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Album [albumId=" + albumId + ", albumPid=" + albumPid + ", albumTitle=" + albumTitle + ", releaseDate="
 				+ releaseDate + ", trackCount=" + trackCount + ", description=" + description + ", artist=" + artist
 				+ "]";
 	}
+
+
 }

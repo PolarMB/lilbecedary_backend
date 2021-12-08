@@ -1,13 +1,11 @@
 package io.lilbecedary.lilbecedary_backend.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import io.lilbecedary.lilbecedary_backend.util.DateFormatter;
+
 public class ArtistDTO {
-	
-	private final String PATTERN = "yyyy-MM-dd";
-	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(this.PATTERN);
 	
 	private String artistPid;
 	private String alias;
@@ -18,7 +16,7 @@ public class ArtistDTO {
 	private BaseCityDTO city;
 	private String description;
 	private String imageUrl;
-	private List<AlbumDTO> albumList;
+	private List<BaseAlbumDTO> albumList;
 
 	public String getArtistPid() {
 		return artistPid;
@@ -57,7 +55,7 @@ public class ArtistDTO {
 	}
 
 	public void setBirthday(Date birthday) {
-		this.birthday = this.simpleDateFormat.format(birthday);
+		this.birthday = DateFormatter.formatDate(birthday);
 	}
 
 	public char getGender() {
@@ -92,11 +90,11 @@ public class ArtistDTO {
 		this.city = city;
 	}
 
-	public List<AlbumDTO> getAlbumList() {
+	public List<BaseAlbumDTO> getAlbumList() {
 		return albumList;
 	}
 
-	public void setAlbumList(List<AlbumDTO> albumList) {
+	public void setAlbumList(List<BaseAlbumDTO> albumList) {
 		this.albumList = albumList;
 	}
 	

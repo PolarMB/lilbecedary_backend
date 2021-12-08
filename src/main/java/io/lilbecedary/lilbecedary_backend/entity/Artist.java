@@ -171,5 +171,12 @@ public class Artist implements Serializable {
 	public void setAlbumList(List<Album> albumList) {
 		this.albumList = albumList;
 	}
+
+	@Override
+	public String toString() {
+		return "Artist [artistId=" + artistId + ", artistPid=" + artistPid + ", alias=" + alias + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", birthday=" + birthday + ", gender=" + gender + ", city="
+				+ city + ", description=" + description + ", imageUrl=" + imageUrl + "]";
+	}
 	
 }

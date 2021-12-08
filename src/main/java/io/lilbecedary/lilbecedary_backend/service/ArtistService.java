@@ -12,7 +12,7 @@ import io.lilbecedary.lilbecedary_backend.util.Converter;
 @Transactional
 public class ArtistService {
 	
-	private ArtistDAO artistDAO; 
+	private final ArtistDAO artistDAO; 
 
 	@Autowired
 	public ArtistService(ArtistDAO artistDAO) {
