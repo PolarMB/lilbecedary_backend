@@ -2,15 +2,15 @@ package io.lilbecedary.lilbecedary_backend.util;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-
 import io.lilbecedary.lilbecedary_backend.dto.ArtistDTO;
 import io.lilbecedary.lilbecedary_backend.dto.FullAlbumDTO;
+import io.lilbecedary.lilbecedary_backend.dto.FullSongDTO;
 import io.lilbecedary.lilbecedary_backend.entity.Album;
 import io.lilbecedary.lilbecedary_backend.entity.Artist;
+import io.lilbecedary.lilbecedary_backend.entity.Song;
 
 
 public class Converter {
@@ -38,6 +38,14 @@ public class Converter {
 			ModelMapper modelMapper = new ModelMapper();
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			return modelMapper.map(album, FullAlbumDTO.class);
+		} else {
+			return null;
+		}
+	}
+	
+	public static FullSongDTO songToDto(Song song) {
+		if (song != null) {
+			return new ModelMapper().map(song, FullSongDTO.class);
 		} else {
 			return null;
 		}

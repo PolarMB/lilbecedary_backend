@@ -2,7 +2,6 @@
 package io.lilbecedary.lilbecedary_backend.config;
 
 import java.time.Duration;
-
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +18,5 @@ public class BeanConfiguration {
 	            .setReadTimeout(Duration.ofMillis(3000))
 	            .build();
 	}
+	
 }
