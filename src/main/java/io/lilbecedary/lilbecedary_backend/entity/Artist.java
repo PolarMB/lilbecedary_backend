@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -51,6 +53,8 @@ public class Artist implements Serializable {
 	@Column(name="gender")
 	private char gender;
 	
+	
+	// Must change relation type to ManyToOne and add OneToMany to City Entity Object.
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="city_id")
 	private City city;
@@ -67,7 +71,35 @@ public class Artist implements Serializable {
 			CascadeType.MERGE,
 			CascadeType.REFRESH
 			})
-	List<Album> albumList;
+	private List<Album> albumList;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={
+			CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH
+			})
+	@JoinTable(
+			name="artist_genres",
+			schema="lilbecedary_db",
+			joinColumns=@JoinColumn(name="artist_id"),
+			inverseJoinColumns=@JoinColumn(name="genre_id")
+			)
+	private List<Genre> genreList;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={
+			CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH
+			})
+	@JoinTable(
+			name="additional_artists",
+			schema="lilbecedary_db",
+			joinColumns=@JoinColumn(name="artist_id"),
+			inverseJoinColumns=@JoinColumn(name="song_id")
+			)
+	private List<Song> featuredSongs;
 	
 	public Artist() {}
 
@@ -172,11 +204,28 @@ public class Artist implements Serializable {
 		this.albumList = albumList;
 	}
 
+	public List<Genre> getGenreList() {
+		return genreList;
+	}
+
+	public void setGenreList(List<Genre> genreList) {
+		this.genreList = genreList;
+	}
+
+	public List<Song> getFeaturedSongs() {
+		return featuredSongs;
+	}
+
+	public void setFeaturedSongs(List<Song> featuredSongs) {
+		this.featuredSongs = featuredSongs;
+	}
+
 	@Override
 	public String toString() {
 		return "Artist [artistId=" + artistId + ", artistPid=" + artistPid + ", alias=" + alias + ", firstname="
 				+ firstname + ", lastname=" + lastname + ", birthday=" + birthday + ", gender=" + gender + ", city="
-				+ city + ", description=" + description + ", imageUrl=" + imageUrl + "]";
+				+ city + ", description=" + description + ", imageUrl=" + imageUrl + ", albumList=" + albumList
+				+ ", genreList=" + genreList + "]";
 	}
 	
 }

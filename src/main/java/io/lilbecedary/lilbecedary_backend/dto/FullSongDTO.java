@@ -1,6 +1,7 @@
 package io.lilbecedary.lilbecedary_backend.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import io.lilbecedary.lilbecedary_backend.util.DateFormatter;
 
@@ -10,6 +11,8 @@ public class FullSongDTO extends BaseSongDTO {
 	private String releaseDate;
 	private String description;
 	private String songUrl;
+	private List<BaseGenreDTO> genres;
+	private List<FeaturedArtistDTO> featuredArtists;
 	
 	public FullSongDTO() {
 		super();
@@ -46,5 +49,22 @@ public class FullSongDTO extends BaseSongDTO {
 	public void setSongUrl(String songUrl) {
 		this.songUrl = songUrl;
 	}
+
+	public List<BaseGenreDTO> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<BaseGenreDTO> genres) {
+		this.genres = genres;
+	}
+
+	public List<FeaturedArtistDTO> getFeaturedArtists() {
+		return featuredArtists;
+	}
+
+	public void setFeaturedArtists(List<FeaturedArtistDTO> featuredArtists) {
+		this.featuredArtists = featuredArtists;
+	}
+	
 	
 }

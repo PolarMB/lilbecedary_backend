@@ -2,7 +2,6 @@ package io.lilbecedary.lilbecedary_backend.util;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import io.lilbecedary.lilbecedary_backend.dto.ArtistDTO;
@@ -35,9 +34,7 @@ public class Converter {
 	
 	public static FullAlbumDTO albumToDto(Album album) {
 		if (album != null) {
-			ModelMapper modelMapper = new ModelMapper();
-			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-			return modelMapper.map(album, FullAlbumDTO.class);
+			return new ModelMapper().addMappings(fullAlbumDtoSkipFields).map(album);
 		} else {
 			return null;
 		}
@@ -63,13 +60,13 @@ public class Converter {
 				.map(album -> albumToDto(album)).collect(Collectors.toList());
 	}
 	
-	PropertyMap<Album, FullAlbumDTO> clientPropertyMap = new PropertyMap<Album, FullAlbumDTO>() {
+	static PropertyMap<Album, FullAlbumDTO> fullAlbumDtoSkipFields = new PropertyMap<Album, FullAlbumDTO>() {
 	    @Override
 	    protected void configure() {
-	    	if (source.getDescription().equals(null)) {
+	    	if (source.getDescription() == null) {
 	    		skip(destination.getDescription());
 	    	}
-	    	if (source.getTrackCount().equals(null)) {
+	    	if (source.getTrackCount() == null) {
 	    		skip(destination.getTrackCount());
 	    	}
 	    }

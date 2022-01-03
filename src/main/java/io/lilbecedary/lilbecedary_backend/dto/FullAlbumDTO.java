@@ -11,6 +11,7 @@ public class FullAlbumDTO extends BaseAlbumDTO {
 	private Integer trackCount;
 	private String description;
 	private List<BaseSongDTO> songs;
+	private List<BaseGenreDTO> genres;
 	
 	public FullAlbumDTO() {
 		super();
@@ -47,5 +48,15 @@ public class FullAlbumDTO extends BaseAlbumDTO {
 	public void setSongs(List<BaseSongDTO> songs) {
 		this.songs = songs;
 	}
+	
+	
+	public List<BaseGenreDTO> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<BaseGenreDTO> genres) {
+		this.genres = genres;
+	}
+	
 	
 }

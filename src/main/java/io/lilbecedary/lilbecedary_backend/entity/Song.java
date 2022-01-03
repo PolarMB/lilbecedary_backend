@@ -2,6 +2,7 @@ package io.lilbecedary.lilbecedary_backend.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -57,6 +60,34 @@ public class Song implements Serializable {
 			}, fetch=FetchType.LAZY)
 	@JoinColumn(name="album")
 	private Album album;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={
+			CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH
+			})
+	@JoinTable(
+			name="song_genres",
+			schema="lilbecedary_db",
+			joinColumns=@JoinColumn(name="song_id"),
+			inverseJoinColumns=@JoinColumn(name="genre_id")
+			)
+	private List<Genre> genres;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={
+			CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH
+			})
+	@JoinTable(
+			name="additional_artists",
+			schema="lilbecedary_db",
+			joinColumns=@JoinColumn(name="song_id"),
+			inverseJoinColumns=@JoinColumn(name="artist_id")
+			)
+	private List<Artist> featuredArtists;
 	
 	public Song() {}
 
@@ -136,8 +167,20 @@ public class Song implements Serializable {
 		this.album = album;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public List<Artist> getFeaturedArtists() {
+		return featuredArtists;
+	}
+
+	public void setFeaturedArtists(List<Artist> featuredArtists) {
+		this.featuredArtists = featuredArtists;
 	}
 	
 }

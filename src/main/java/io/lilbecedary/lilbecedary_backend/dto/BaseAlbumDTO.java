@@ -20,5 +20,6 @@ public class BaseAlbumDTO {
 	public void setAlbumTitle(String albumTitle) {
 		this.albumTitle = albumTitle;
 	}
+	
 
 }

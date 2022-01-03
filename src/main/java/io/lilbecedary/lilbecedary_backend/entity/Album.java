@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -61,6 +63,20 @@ public class Album implements Serializable {
 			cascade= { CascadeType.ALL }, 
 			fetch=FetchType.LAZY)
 	private List<Song> songs; 
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={
+			CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH
+			})
+	@JoinTable(
+			name="album_genres",
+			schema="lilbecedary_db",
+			joinColumns=@JoinColumn(name="album_id"),
+			inverseJoinColumns=@JoinColumn(name="genre_id")
+			)
+	private List<Genre> genres;
 	
 	public Album() {}
 
@@ -140,6 +156,14 @@ public class Album implements Serializable {
 
 	public void setTrackCount(Integer trackCount) {
 		this.trackCount = trackCount;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
 	}
 
 	@Override

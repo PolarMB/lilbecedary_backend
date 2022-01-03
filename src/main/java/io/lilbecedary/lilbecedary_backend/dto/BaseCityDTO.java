@@ -4,7 +4,6 @@ package io.lilbecedary.lilbecedary_backend.dto;
 public class BaseCityDTO {
 	
 	private String cityPid;
-	
 	private String cityName;
 	
 

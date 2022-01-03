@@ -17,6 +17,7 @@ public class ArtistDTO {
 	private String description;
 	private String imageUrl;
 	private List<BaseAlbumDTO> albumList;
+	private List<BaseGenreDTO> genreList;
 
 	public String getArtistPid() {
 		return artistPid;
@@ -96,6 +97,14 @@ public class ArtistDTO {
 
 	public void setAlbumList(List<BaseAlbumDTO> albumList) {
 		this.albumList = albumList;
+	}
+
+	public List<BaseGenreDTO> getGenreList() {
+		return genreList;
+	}
+
+	public void setGenreList(List<BaseGenreDTO> genreList) {
+		this.genreList = genreList;
 	}
 	
 }
