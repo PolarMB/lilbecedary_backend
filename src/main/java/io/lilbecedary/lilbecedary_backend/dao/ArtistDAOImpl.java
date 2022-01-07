@@ -36,8 +36,8 @@ public class ArtistDAOImpl implements ArtistDAO {
 	public List<Artist> getArtistByAlias(String alias) {
 		
 		Session session = factory.unwrap(Session.class);
-		Query<Artist> artistQuery = session.createQuery("FROM Artist WHERE alias=:alias", Artist.class);
-		artistQuery.setParameter("alias", alias);
+		Query<Artist> artistQuery = session.createQuery("FROM Artist WHERE alias LIKE :alias", Artist.class);
+		artistQuery.setParameter("alias", alias+"%");
 		
 		
 		return artistQuery.getResultList();

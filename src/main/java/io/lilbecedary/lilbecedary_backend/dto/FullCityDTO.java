@@ -6,6 +6,7 @@ public class FullCityDTO extends BaseCityDTO {
 	private double population;
 	private double latitude;
 	private double longitude;
+	private RegionDTO region;
 	
 	public FullCityDTO() {
 		super();
@@ -33,6 +34,14 @@ public class FullCityDTO extends BaseCityDTO {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+
+	public RegionDTO getRegion() {
+		return region;
+	}
+
+	public void setRegion(RegionDTO region) {
+		this.region = region;
 	}
 
 }
