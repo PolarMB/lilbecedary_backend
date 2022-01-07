@@ -65,6 +65,9 @@ public class Artist implements Serializable {
 	@Column(name="image_url")
 	private String imageUrl;
 	
+	@Column(name="status")
+	private String status;
+	
 	@OneToMany(mappedBy="artist",cascade= {
 			CascadeType.DETACH,
 			CascadeType.PERSIST,
@@ -218,6 +221,14 @@ public class Artist implements Serializable {
 
 	public void setFeaturedSongs(List<Song> featuredSongs) {
 		this.featuredSongs = featuredSongs;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

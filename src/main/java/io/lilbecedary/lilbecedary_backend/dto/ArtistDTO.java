@@ -16,6 +16,7 @@ public class ArtistDTO {
 	private BaseCityDTO city;
 	private String description;
 	private String imageUrl;
+	private String status;
 	private List<BaseAlbumDTO> albumList;
 	private List<BaseGenreDTO> genreList;
 
@@ -89,6 +90,14 @@ public class ArtistDTO {
 
 	public void setCity(BaseCityDTO city) {
 		this.city = city;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public List<BaseAlbumDTO> getAlbumList() {
