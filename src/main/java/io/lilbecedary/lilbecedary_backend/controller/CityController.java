@@ -15,8 +15,10 @@ import io.lilbecedary.lilbecedary_backend.service.CityService;
 @RequestMapping("/api/cities")
 public class CityController {
 
+	private final CityService cityService;
+
 	@Autowired
-	private CityService cityService;
+	public CityController(CityService cityService){ this.cityService = cityService; }
 	
 	@GetMapping
 	public List<FullCityDTO> getCities(
